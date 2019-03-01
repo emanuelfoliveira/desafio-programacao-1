@@ -1,47 +1,118 @@
-# Desafio de programação 1
-A idéia deste desafio é nos permitir avaliar melhor as habilidades de candidatos à vagas de programador, de vários níveis.
+# Spring Boot Challange Nexaas
 
-Este desafio deve ser feito por você em sua casa. Gaste o tempo que você quiser, porém normalmente você não deve precisar de mais do que algumas horas.
+## About
 
-## Instruções de entrega do desafio
-1. Primeiro, faça um fork deste projeto para sua conta no Github (crie uma se você não possuir).
-1. Em seguida, implemente o projeto tal qual descrito abaixo, em seu próprio fork.
-1. Por fim, empurre todas as suas alterações para o seu fork no Github e envie um pull request para este repositório original. Se você já entrou em contato com alguém da Nexaas sobre uma vaga, avise também essa pessoa por email, incluindo no email o seu usuário no Github.
+This is a demo project. The idea was to build some basic web import app.
 
-## Instruções alternativas de entrega do desafio (caso você não queira que sua submissão seja pública)
-1. Faça um clone deste repositório.
-1. Em seguida, implemente o projeto tal qual descrito abaixo, em seu clone local.
-1. Por fim, envie via email um arquivo patch para seu contato na Nexaas.
+It was made using **Spring Boot**, **Java Web Token (JWT)**, **Thymeleaf**, **Spring Data JPA**, **Lombok**. Database is in memory **H2**.
 
-## Descrição do projeto
-Você recebeu um arquivo de texto com os dados de vendas da empresa. Precisamos criar uma maneira para que estes dados sejam importados para um banco de dados.
+There is a login and registration functionality included.
 
-Sua tarefa é criar uma interface web que aceite upload de arquivos, normalize os dados e armazene-os em um banco de dados relacional.
+## Configuration
 
-Sua aplicação web DEVE:
+### Configuration Files
 
-1. Aceitar (via um formulário) o upload de arquivos separados por TAB com as seguintes colunas: purchaser name, item description, item price, purchase count, merchant address, merchant name. Você pode assumir que as colunas estarão sempre nesta ordem, que sempre haverá dados em cada coluna, e que sempre haverá uma linha de cabeçalho. Um arquivo de exemplo chamado example_input.tab está incluído neste repositório.
-1. Interpretar ("parsear") o arquivo recebido, normalizar os dados, e salvar corretamente a informação em um banco de dados relacional.
-1. Exibir a receita bruta total representada pelo arquivo enviado após o upload + parser.
-1. Ser escrita obrigatoriamente em Ruby 2.0+, Python 2.7+, Java 7+ ou PHP 5.3+ (caso esteja entrevistando para uma vaga específica, utilize a linguagem solicitada pela vaga).
-1. Ser simples de configurar e rodar, funcionando em ambiente compatível com Unix (Linux ou Mac OS X). Ela deve utilizar apenas linguagens e bibliotecas livres ou gratuitas.
+Folder **src/resources/** contains config files for **Spring boot Challenge** Spring Boot application.
 
-Sua aplicação web não precisa:
+## How to run
 
-1. Lidar com autenticação ou autorização (pontos extras se ela fizer, mais pontos extras se a autenticação for feita via OAuth).
-1. Ser escrita usando algum framework específico (mas não há nada errado em usá-los também, use o que achar melhor).
-1. Ter uma aparência bonita.
+There are several ways to run the application. You can run it from the command line with included Maven Wrapper, Maven. 
 
-## Avaliação
-Seu projeto será avaliado de acordo com os seguintes critérios. 
+Once the app starts, go to the web browser and visit `http://localhost:8090/`
 
-1. Sua aplicação preenche os requerimentos básicos?
-1. Você documentou a maneira de configurar o ambiente e rodar sua aplicação?
-1. Você seguiu as instruções de envio do desafio?
-1. Qualidade e cobertura dos testes unitários.
+username: **nexaas**
 
-Adicionalmente, tentaremos verificar a sua familiarização com as bibliotecas padrões (standard libs), bem como sua experiência com programação orientada a objetos a partir da estrutura de seu projeto.
+password: **123**
 
-### Referência
 
-Este desafio foi baseado neste outro desafio: https://github.com/lschallenges/data-engineering
+### Maven Wrapper
+
+#### Using the Maven Plugin
+
+Go to the root folder of the application and type:
+```bash
+$ chmod +x scripts/mvnw
+$ scripts/mvnw spring-boot:run
+```
+
+#### Using Executable Jar
+
+Or you can build the JAR file with 
+```bash
+$ scripts/mvnw clean package
+``` 
+
+Then you can run the JAR file:
+```bash
+$ java -jar target/challenge-0.0.1-SNAPSHOT.jar
+```
+
+### Maven
+
+Open a terminal and run the following commands to ensure that you have valid versions of Java and Maven installed:
+
+```bash
+$ java -version
+java version "1.8.0_151"
+Java(TM) SE Runtime Environment (build 11.8.0_151-b14)
+Java HotSpot(TM) 64-Bit Server VM
+```
+
+```bash
+$ mvn -v
+Apache Maven 3.3.9 (bb52d8502b132ec0a5a3f4c09453c07478323dc5; 2015-11-10T16:41:47+00:00)
+Maven home: /usr/local/Cellar/maven/3.3.9/libexec
+Java version: 1.8.0_102, vendor: Oracle Corporation
+```
+
+#### Using the Maven Plugin
+
+The Spring Boot Maven plugin includes a run goal that can be used to quickly compile and run your application. 
+Applications run in an exploded form, as they do in your IDE. 
+The following example shows a typical Maven command to run a Spring Boot application:
+ 
+```bash
+$ mvn spring-boot:run
+``` 
+
+#### Using Executable Jar
+
+To create an executable jar run:
+
+```bash
+$ mvn clean package
+``` 
+
+To run that application, use the java -jar command, as follows:
+
+```bash
+$ java -jar target/challenge-0.0.1-SNAPSHOT.jar
+```
+
+To exit the application, press **ctrl-c**.
+
+Tests can be run by executing following command from the root of the project:
+
+```bash
+$ mvn test
+```
+
+## Helper Tools
+
+### HAL REST Browser
+
+Go to the web browser and visit `http://localhost:8080/`
+
+You will need to be authenticated to be able to see this page.
+
+### H2 Database web interface
+
+Go to the web browser and visit `http://localhost:8080/h2-console`
+
+In field **JDBC URL** put 
+```
+jdbc:h2:mem:mydb
+```
+
+In `/src/main/resources/application.properties` file it is possible to change both
+web interface url path, as well as the datasource url.

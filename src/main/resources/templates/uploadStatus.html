@@ -1,0 +1,11 @@
+<body>
+	<form th:action="@{/redirectUploadForm}" method="post">
+		<div th:if="${message}">
+			<h2 th:text="${message}"/>
+		</div>
+		<div th:if="${grossIncome}">
+			<h3 th:text="${grossIncome}"/>
+		</div>
+		<input type="submit" value="Upload Again" />
+	</form>
+</body>
